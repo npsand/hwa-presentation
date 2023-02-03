@@ -19,7 +19,8 @@ parser.add_argument('-ff', '--full_frame', action="store_true",
 
 args = parser.parse_args()
 
-fullFrameTracking = args.full_frame
+# fullFrameTracking = args.full_frame
+fullFrameTracking = False
 
 # Create pipeline
 pipeline = dai.Pipeline()
@@ -41,7 +42,7 @@ trackerOut.setStreamName("tracklets")
 
 # Properties
 camRgb.setPreviewSize(300, 300)
-camRgb.setResolution(dai.ColorCameraProperties.SensorResolution.THE_1080_P)
+camRgb.setResolution(dai.ColorCameraProperties.SensorResolution.THE_720_P)
 camRgb.setInterleaved(False)
 camRgb.setColorOrder(dai.ColorCameraProperties.ColorOrder.BGR)
 
@@ -139,10 +140,10 @@ with dai.Device(pipeline) as device:
             cv2.rectangle(frame, (x1, y1), (x2, y2),
                           color, cv2.FONT_HERSHEY_SIMPLEX)
 
-            x_middle = x2 - x1
-            y_middle = y2 - y1
+            x_middle = int(x1 + (x2 - x1) / 2)
+            y_middle = int(y1 + (y2 - y1) / 2)
 
-            cv2.circle(frame, (x_middle, y_middle), 5, (255,0,0), 3)
+            cv2.circle(frame, (x_middle, y_middle), 20, (255, 0, 0), 3)
 
             """
             cv2.putText(frame, f"X: {int(t.spatialCoordinates.x)} mm",
@@ -156,7 +157,7 @@ with dai.Device(pipeline) as device:
         cv2.putText(frame, "NN fps: {:.2f}".format(
             fps), (2, frame.shape[0] - 4), cv2.FONT_HERSHEY_TRIPLEX, 0.4, color)
 
-        cv2.imshow("tracker", frame)
+        cv2.imshow("tracker", frame,)
 
         if cv2.waitKey(1) == ord('q'):
             break
