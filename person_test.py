@@ -7,8 +7,6 @@ import numpy as np
 import time
 import argparse
 
-labelMap = ["person"]
-
 nnPathDefault = str((Path(__file__).parent / Path(
     './mobilenet-ssd_openvino_2021.4_6shave.blob')).resolve().absolute())
 parser = argparse.ArgumentParser()
