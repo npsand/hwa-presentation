@@ -103,6 +103,8 @@ with dai.Device(pipeline) as device:
     fps = 0
     color = (255, 255, 255)
 
+    middle_pixels = []
+
     while (True):
         imgFrame = preview.get()
         track = tracklets.get()
@@ -137,12 +139,19 @@ with dai.Device(pipeline) as device:
             cv2.rectangle(frame, (x1, y1), (x2, y2),
                           color, cv2.FONT_HERSHEY_SIMPLEX)
 
+            x_middle = int(roi.topRight().x - roi.topLeft().x)
+            y_middle = int(roi.bottomRight().y - roi.bottomLeft(.y))
+
+            cv2.circle(frame, (x_middle, y_middle), 5, (255,0,0), 3)
+
+            """
             cv2.putText(frame, f"X: {int(t.spatialCoordinates.x)} mm",
                         (x1 + 10, y1 + 65), cv2.FONT_HERSHEY_TRIPLEX, 0.5, 255)
             cv2.putText(frame, f"Y: {int(t.spatialCoordinates.y)} mm",
                         (x1 + 10, y1 + 80), cv2.FONT_HERSHEY_TRIPLEX, 0.5, 255)
             cv2.putText(frame, f"Z: {int(t.spatialCoordinates.z)} mm",
                         (x1 + 10, y1 + 95), cv2.FONT_HERSHEY_TRIPLEX, 0.5, 255)
+            """
 
         cv2.putText(frame, "NN fps: {:.2f}".format(
             fps), (2, frame.shape[0] - 4), cv2.FONT_HERSHEY_TRIPLEX, 0.4, color)
