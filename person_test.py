@@ -42,7 +42,7 @@ trackerOut.setStreamName("tracklets")
 
 # Properties
 camRgb.setPreviewSize(300, 300)
-camRgb.setResolution(dai.ColorCameraProperties.SensorResolution.THE_720_P)
+camRgb.setResolution(dai.ColorCameraProperties.SensorResolution.THE_1080_P)
 camRgb.setInterleaved(False)
 camRgb.setColorOrder(dai.ColorCameraProperties.ColorOrder.BGR)
 
@@ -157,7 +157,9 @@ with dai.Device(pipeline) as device:
         cv2.putText(frame, "NN fps: {:.2f}".format(
             fps), (2, frame.shape[0] - 4), cv2.FONT_HERSHEY_TRIPLEX, 0.4, color)
 
-        cv2.imshow("tracker", frame,)
+        cv2.namedWindow('tracker', cv2.WINDOW_NORMAL)
+
+        cv2.imshow("tracker", frame)
 
         if cv2.waitKey(1) == ord('q'):
             break
