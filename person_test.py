@@ -72,6 +72,9 @@ objectTracker.setTrackerType(dai.TrackerType.ZERO_TERM_COLOR_HISTOGRAM)
 objectTracker.setTrackerIdAssignmentPolicy(
     dai.TrackerIdAssignmentPolicy.SMALLEST_ID)
 
+objectTracker.setMaxObjectsToTrack(1)
+objectTracker.setTrackerThreshold(0.85)
+
 # Linking
 monoLeft.out.link(stereo.left)
 monoRight.out.link(stereo.right)
@@ -120,6 +123,10 @@ with dai.Device(pipeline) as device:
         frame = imgFrame.getCvFrame()
         trackletsData = track.tracklets
         for t in trackletsData:
+
+            if t.status.name == "LOST":
+                continue
+
             roi = t.roi.denormalize(frame.shape[1], frame.shape[0])
             x1 = int(roi.topLeft().x)
             y1 = int(roi.topLeft().y)
@@ -158,6 +165,7 @@ with dai.Device(pipeline) as device:
             fps), (2, frame.shape[0] - 4), cv2.FONT_HERSHEY_TRIPLEX, 0.4, color)
 
         cv2.namedWindow('tracker', cv2.WINDOW_NORMAL)
+        cv2.resizeWindow("tracker", 900, 900)
 
         cv2.imshow("tracker", frame)
 
