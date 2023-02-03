@@ -139,8 +139,8 @@ with dai.Device(pipeline) as device:
             cv2.rectangle(frame, (x1, y1), (x2, y2),
                           color, cv2.FONT_HERSHEY_SIMPLEX)
 
-            x_middle = int(roi.topRight().x - roi.topLeft().x)
-            y_middle = int(roi.bottomRight().y - roi.bottomLeft(.y))
+            x_middle = x2 - x1
+            y_middle = y2 - y1
 
             cv2.circle(frame, (x_middle, y_middle), 5, (255,0,0), 3)
 
