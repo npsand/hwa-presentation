@@ -6,6 +6,7 @@ import depthai as dai
 import numpy as np
 import time
 import argparse
+from DistanceCalculator import DistanceCalculator
 
 labelMap = ["person"]
 
@@ -108,6 +109,7 @@ with dai.Device(pipeline) as device:
     color = (255, 255, 255)
 
     middle_pixels = []
+    dist_calculator = DistanceCalculator()
 
     while (True):
         imgFrame = preview.get()
@@ -150,7 +152,14 @@ with dai.Device(pipeline) as device:
             x_middle = int(x1 + (x2 - x1) / 2)
             y_middle = int(y1 + (y2 - y1) / 2)
 
-            cv2.circle(frame, (x_middle, y_middle), 20, (255, 0, 0), 3)
+            cv2.circle(frame, (x_middle, y_middle), 20, (255, 0, 0), 1)
+
+            speed = dist_calculator.get_speed(int(t.spatialCoordinates.x),
+                                              int(t.spatialCoordinates.y),
+                                              int(t.spatialCoordinates.z))
+
+            cv2.putText(frame, f"Speed: {speed:.1f} m/s",
+                        (x1 + 10, y1 + 65), cv2.FONT_HERSHEY_TRIPLEX, 0.5, 255)
 
             """
             cv2.putText(frame, f"X: {int(t.spatialCoordinates.x)} mm",
