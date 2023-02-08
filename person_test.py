@@ -140,26 +140,28 @@ with dai.Device(pipeline) as device:
             except:
                 label = t.label
 
+            """
             cv2.putText(frame, str(label), (x1 + 10, y1 + 20),
                         cv2.FONT_HERSHEY_TRIPLEX, 0.5, 255)
             cv2.putText(
                 frame, f"ID: {[t.id]}", (x1 + 10, y1 + 35), cv2.FONT_HERSHEY_TRIPLEX, 0.5, 255)
             cv2.putText(frame, t.status.name, (x1 + 10, y1 + 50),
                         cv2.FONT_HERSHEY_TRIPLEX, 0.5, 255)
+            """
             cv2.rectangle(frame, (x1, y1), (x2, y2),
                           color, cv2.FONT_HERSHEY_SIMPLEX)
 
             x_middle = int(x1 + (x2 - x1) / 2)
             y_middle = int(y1 + (y2 - y1) / 2)
 
-            cv2.circle(frame, (x_middle, y_middle), 20, (255, 0, 0), 1)
+            cv2.circle(frame, (x_middle, y_middle), 10, (255, 0, 0), 1)
 
             speed = dist_calculator.get_speed(int(t.spatialCoordinates.x),
                                               int(t.spatialCoordinates.y),
                                               int(t.spatialCoordinates.z))
 
             cv2.putText(frame, f"Speed: {speed:.1f} m/s",
-                        (x1 + 10, y1 + 65), cv2.FONT_HERSHEY_TRIPLEX, 0.5, 255)
+                        (x1, y1 - 5), cv2.FONT_HERSHEY_TRIPLEX, 0.5, 255)
 
             """
             cv2.putText(frame, f"X: {int(t.spatialCoordinates.x)} mm",
