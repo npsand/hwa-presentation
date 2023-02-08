@@ -1,4 +1,5 @@
-# hwa-presentation
+# Hardware Acceleration for AI presentation
+## OAK-D cam accelometer
 
 To run this program you need Python version 3.
 
