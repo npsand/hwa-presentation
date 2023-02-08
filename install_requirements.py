@@ -166,7 +166,7 @@ if not args.skip_depthai:
                 "Couldn't install dependencies as wheels and trying to compile from sources failed")
             print("Check https://github.com/luxonis/depthai-python#dependencies on retrieving dependencies for compiling from sources")
 
-downloader_cmd = [sys.executable, f"{examples_dir}/downloader/downloader.py", "--all", "--cache_dir",
+downloader_cmd = [sys.executable, f"{examples_dir}/downloader.py", "--all", "--cache_dir",
                   f"{examples_dir}/downloader/", "--num_attempts", "5", "-o", f"{examples_dir}/models"]
 if args.dry_run:
     prettyPrint(downloader_cmd)
