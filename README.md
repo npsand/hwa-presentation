@@ -12,7 +12,7 @@ python3 install_requirements.py
 Run program using following command:
 
 ```
-python main.py
+python3 main.py
 ```
 
 If you get any of these errors
