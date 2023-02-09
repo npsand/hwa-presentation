@@ -11,6 +11,8 @@ python3 install_requirements.py
 
 Run program using following command:
 
+*Make sure that the OAK-D camera is connected to the computer before executing the following command.*
+
 ```
 python3 main.py
 ```
