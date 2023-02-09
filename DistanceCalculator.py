@@ -2,9 +2,11 @@
 import numpy as np
 from random import randint
 
+
 class DistanceCalculator():
     def __init__(self):
-        self.coord_arr = [[0,0,0], [0,0,0], [0,0,0], [0,0,0] ,[0,0,0] ,[0,0,0]]
+        self.coord_arr = [[0, 0, 0], [0, 0, 0], [
+            0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]]
 
     def get_speed(self, x, y, z):
         self.add_to_queue(x, y, z)
@@ -14,8 +16,8 @@ class DistanceCalculator():
 
         return delta_dist
 
+    # Calculates the distance between first and last cordinates in cordinate array
 
-    #Calculates the distance between first and last cordinates in cordinate array
     def calc_distance(self):
         dx = self.coord_arr[5][0]-self.coord_arr[0][0]
         dy = self.coord_arr[5][1]-self.coord_arr[0][1]
@@ -23,26 +25,12 @@ class DistanceCalculator():
         d = np.sqrt(((dx)**2 + (dy)**2 + (dz)**2)) / 1000
 
         return d
-    
-    #Moves every item in the list by one ans add new cordinates (x, y, z) to the beginning of the list.
+
+    # Moves every item in the list by one ans add new cordinates (x, y, z) to the beginning of the list.
     def add_to_queue(self, x, y, z):
-        for q in range(1,6):
+        for q in range(1, 6):
             self.coord_arr.insert(6-q, self.coord_arr.pop(5-q))
 
         self.coord_arr[0][0] = x
         self.coord_arr[0][1] = y
         self.coord_arr[0][2] = z
-
-    
-    #Genereates random cordinates to be added to the list.
-    """
-    for i in range(10):
-        x = randint(-10, 10)
-        y = randint(-10, 10)
-        z = randint(-10, 10)
-
-        addToQueue(x, y, z)
-    """
-
-
-

@@ -3,7 +3,6 @@
 from pathlib import Path
 import cv2
 import depthai as dai
-import numpy as np
 import time
 import argparse
 from DistanceCalculator import DistanceCalculator
@@ -140,14 +139,6 @@ with dai.Device(pipeline) as device:
             except:
                 label = t.label
 
-            """
-            cv2.putText(frame, str(label), (x1 + 10, y1 + 20),
-                        cv2.FONT_HERSHEY_TRIPLEX, 0.5, 255)
-            cv2.putText(
-                frame, f"ID: {[t.id]}", (x1 + 10, y1 + 35), cv2.FONT_HERSHEY_TRIPLEX, 0.5, 255)
-            cv2.putText(frame, t.status.name, (x1 + 10, y1 + 50),
-                        cv2.FONT_HERSHEY_TRIPLEX, 0.5, 255)
-            """
             cv2.rectangle(frame, (x1, y1), (x2, y2),
                           color, cv2.FONT_HERSHEY_SIMPLEX)
 
@@ -162,15 +153,6 @@ with dai.Device(pipeline) as device:
 
             cv2.putText(frame, f"Speed: {speed:.1f} m/s",
                         (x1, y1 - 5), cv2.FONT_HERSHEY_TRIPLEX, 0.5, 255)
-
-            """
-            cv2.putText(frame, f"X: {int(t.spatialCoordinates.x)} mm",
-                        (x1 + 10, y1 + 65), cv2.FONT_HERSHEY_TRIPLEX, 0.5, 255)
-            cv2.putText(frame, f"Y: {int(t.spatialCoordinates.y)} mm",
-                        (x1 + 10, y1 + 80), cv2.FONT_HERSHEY_TRIPLEX, 0.5, 255)
-            cv2.putText(frame, f"Z: {int(t.spatialCoordinates.z)} mm",
-                        (x1 + 10, y1 + 95), cv2.FONT_HERSHEY_TRIPLEX, 0.5, 255)
-            """
 
         cv2.putText(frame, "NN fps: {:.2f}".format(
             fps), (2, frame.shape[0] - 4), cv2.FONT_HERSHEY_TRIPLEX, 0.4, color)
