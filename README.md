@@ -1,6 +1,8 @@
 # Hardware Acceleration for AI presentation
 ## OAK-D cam accelometer
 
+
+### Install
 To run this program you need Python version 3.
 
 Install requirements using following command:
@@ -9,13 +11,17 @@ Install requirements using following command:
 python3 install_requirements.py
 ```
 
+### Run
+*Make sure that the OAK-D camera is connected to the computer before executing the following command.*
+
 Run program using following command:
 
-*Make sure that the OAK-D camera is connected to the computer before executing the following command.*
 
 ```
 python3 main.py
 ```
+### Troubleshooting
+
 
 If you get any of these errors
 
